@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -9,11 +8,12 @@ using System.Web.Mvc;
 using EmployeeManagement.Models;
 using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+using System.Text;
+using EmployeeManagement.BusinessLogic;
 
 namespace EmployeeManagement.Controllers
 {
-    //[Authorize(Roles ="Admin")]
+    [CustomAuthorize(Roles = "Admin")]
     public class ApplicationUsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -161,10 +161,100 @@ namespace EmployeeManagement.Controllers
 
             return callbackUrl;
         }
-        public JsonResult SelectUsers()
+
+        #region jqGrid
+        public JsonResult SelectUsers(string sord, int page, int rows, string searchString)
         {
-            return Json(db.Users.ToList());
+            //using(ApplicationDbContext db =new ApplicationDbContext())
+            //{
+            int pageIndex = Convert.ToInt32(page) - 1;
+            int pageSize = rows;
+
+            var results = db.Users.Select(a =>
+                          new
+                          {
+                              a.FirstName,
+                              a.LastName,
+                              a.Email,
+                              a.Gender,
+                              a.DOB,
+                              a.State,
+                              a.Country,
+
+                          });
+            int totalRecords = results.Count();
+            var totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
+
+            if (sord.ToUpper() == "DESC")
+            {
+                results = results.OrderByDescending(s => s.FirstName);
+                results = results.Skip(pageIndex * pageSize).Take(pageSize);
+            }
+            else
+            {
+                results = results.OrderBy(s => s.FirstName);
+                results = results.Skip(pageIndex * pageSize).Take(pageSize);
+            }
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                results = results.Where(m => m.FirstName.Contains(searchString));
+            }
+
+            var jsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = results
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+            //}
+
         }
+
+        [HttpPost]
+        public JsonResult CreateEmployee([Bind(Exclude = "Id")]  ApplicationUser applicationUser)
+        {
+            StringBuilder msg = new StringBuilder();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    using (ApplicationDbContext db = new ApplicationDbContext())
+                    {
+                        db.Users.Add(applicationUser);
+                        db.SaveChanges();
+                        return Json("Saved Successfully", JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    var errorList = (from item in ModelState
+                                     where item.Value.Errors.Any()
+                                     select item.Value.Errors[0].ErrorMessage).ToList();
+
+                    return Json(errorList, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var errormessage = "Error occured: " + ex.Message;
+                return Json(errormessage, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        public string DeleteEmp(string Id)
+        {
+            ApplicationUser applicationUser = db.Users.Find(Id);
+            db.Users.Remove(applicationUser);
+            db.SaveChanges();
+            return "Deleted successfully";
+        }
+
+        #endregion jqGrid
+
 
         protected override void Dispose(bool disposing)
         {

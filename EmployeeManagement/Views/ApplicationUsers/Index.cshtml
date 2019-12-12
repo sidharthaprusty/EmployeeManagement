@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@*<link href="~/Content/themes/base/jquery.ui.all.css" rel="stylesheet" />
+    <link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <script src="~/Scripts/i18n/grid.locale-en.js"></script>
+    <script src="~/Scripts/jquery.jqGrid.min.js"></script>*@
 <h2>Index</h2>
 
 <p>
@@ -36,98 +39,204 @@
             @Html.DisplayNameFor(model => model.EmailConfirmed)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.PasswordHash)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecurityStamp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LockoutEnabled)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccessFailedCount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>*@
+                @Html.DisplayNameFor(model => model.PasswordHash)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecurityStamp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LockoutEnabled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccessFailedCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>*@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DOB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmailConfirmed)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.PasswordHash)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecurityStamp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LockoutEnabled)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccessFailedCount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            @if (!item.EmailConfirmed)
-            {
-                @Html.ActionLink(" | Resend Confirmation", "ResendConfirmation", new { id = item.Id })
-            }
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailConfirmed)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.PasswordHash)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SecurityStamp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LockoutEnabled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccessFailedCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @if (!item.EmailConfirmed)
+                {
+                    @Html.ActionLink(" | Resend Confirmation", "ResendConfirmation", new { id = item.Id })
+                }
+            </td>
+        </tr>
+    }
 
 </table>
+
+<table id="EmpGrid"></table>
+<div id="pager"></div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            debugger;
+            $("#EmpGrid").jqGrid({
+                url: "/ApplicationUsers/SelectUsers",
+                datatype: 'json',
+                mtype: 'Get',
+                autoencode: true,
+
+                //table header names
+                colNames: ['FirstName','LastName','Email','Gender','DOB','State','Country'],
+                colModel: [
+                    { name: "FirstName" },
+                    { name: "LastName" },
+                    { name: "Email" },
+                    { name: "Gender" },
+                    { name: "DOB" ,formatter: "date", formatoptions: { newformat: "d/m/Y"} },
+                    { name: "State" },
+                    { name: "Country" }
+                ],
+                height: '100%',
+                rowNum: 10,
+                viewrecords: true,
+                caption: 'Employee JqGrid',
+                emptyrecords: 'No records are available',
+
+                pager: jQuery('#pager'),
+                rowList: [10, 20, 30, 40],
+
+                jsonReader:
+                {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+                    repeatitems: false,
+                    Id: "0"
+                },
+                autowidth: true,
+            }).navGrid('#pager',
+            {
+                edit: true,
+                add: true,
+                del: true,
+                search: true,
+                refresh: true,
+                closeAfterSearch: true
+            },
+            {
+                // add options
+
+                zIndex: 100,
+                url: "/ApplicationUsers/CreateEmployee",
+                closeOnEscape: true,
+                closeAfterAdd: true,
+                colModel: [
+                    { name: "FirstName", editable: true, editrules: { required: true } },
+                    { name: "LastName", editable: true, editrules: { required: true } },
+                    { name: "Email", editable: true, editrules: { required: true } },
+                    { name: "Gender", editable: true, editrules: { required: true } },
+                    { name: "DOB", formatter: "date", formatoptions: { newformat: "d/m/Y" }, editable: true, editrules: { required: true } },
+                    { name: "State", editable: true, editrules: { required: true } },
+                    { name: "Country", editable: true, editrules: { required: true } }
+                ],
+                afterComplete: function (response) {
+                    if (response.responseJSON) {
+                        if (response.responseJSON == "Saved Successfully") {
+                            alert("Saved Successfully");
+                        }
+                        else {
+                            var message = "";
+                            for (var i = 0; i < response.responseJSON.length; i++) {
+                                message += response.responseJSON[i];
+                                message += "\n";
+                            }
+                        }
+
+                    }
+                }
+            },
+
+            {
+                zIndex: 100,
+                url: "/ApplicationUsers/DeleteEmp",
+                closeOnEscape: true,
+                closeAfterDelete: true,
+                recreateForm: true,
+                msg: "Are you sure you want to delete Student... ? ",
+                afterComplete: function (response) {
+                    if (response.responseText) {
+                        alert(response.responseText);
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+
