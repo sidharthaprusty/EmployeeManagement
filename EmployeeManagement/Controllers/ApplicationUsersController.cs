@@ -13,7 +13,7 @@ using EmployeeManagement.BusinessLogic;
 
 namespace EmployeeManagement.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
+    //[CustomAuthorize(Roles = "Admin")]
     public class ApplicationUsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
