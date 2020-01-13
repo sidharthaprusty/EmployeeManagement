@@ -9,7 +9,9 @@ using EmployeeManagement.Models;
 using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
 using System.Text;
-using EmployeeManagement.BusinessLogic;
+using System.Data.SqlClient;
+using System.Collections.Generic;
+using System.Configuration;
 
 namespace EmployeeManagement.Controllers
 {
@@ -21,8 +23,24 @@ namespace EmployeeManagement.Controllers
         // GET: ApplicationUsers
         public ActionResult Index()
         {
-            var users = db.Users.ToList();            
-            return View(users);
+            //var users = db.Users.ToList();            
+            //return View(users);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            string sqlproc = "";
+            sqlproc = "selectUsers";
+            using (SqlCommand command = new SqlCommand(sqlproc, con))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                List<ApplicationUser> data = new List<ApplicationUser>();
+                con.Open();
+
+                SqlDataReader dr = command.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+
+                //return Json(stats, JsonRequestBehavior.AllowGet);
+                return View(dt);
+            }
         }
 
         // GET: ApplicationUsers/Details/5

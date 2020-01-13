@@ -1,5 +1,6 @@
-﻿@model IEnumerable<EmployeeManagement.Models.ApplicationUser>
+﻿@*@model IEnumerable<EmployeeManagement.Models.ApplicationUser>*@
 
+@using System.Data
 @{
     ViewBag.Title = "Index";
 }
@@ -10,7 +11,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
+    @*<tr>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
@@ -77,13 +78,79 @@
                 }
             </td>
         </tr>
-    }
+    }*@
 
+    <tr>
+        <th>
+            @Html.DisplayName("FirstName")
+        </th>
+        <th>
+            @Html.DisplayName("LastName")
+        </th>
+        <th>
+            @Html.DisplayName("Gender")
+        </th>
+        <th>
+            @Html.DisplayName("DOB")
+        </th>
+        <th>
+            @Html.DisplayName("State")
+        </th>
+        <th>
+            @Html.DisplayName("Country")
+        </th>
+        <th>
+            @Html.DisplayName("Email")
+        </th>
+        <th>
+            @Html.DisplayName("EmailConfirmed")
+        </th>
+        <th></th>
+
+    </tr>
+@foreach (var item in Model.Rows)
+{
+    <tr>
+        <td>
+            @item["FirstName"]
+        </td>
+        <td>
+            @item["LastName"]
+        </td>
+        <td>
+            @item["Gender"]
+        </td>
+        <td>
+            @item["DOB"]
+        </td>
+        <td>
+           @item["State"]
+        </td>
+        <td>
+            @item["Country"]
+        </td>
+        <td>
+            @item["Email"]
+        </td>
+        <td>
+            @item["EmailConfirmed"]
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item["Id"] }) |
+            @Html.ActionLink("Details", "Details", new { id = item["Id"] }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item["Id"] })
+            @if (!item["EmailConfirmed"])
+            {
+                @Html.ActionLink(" | Resend Confirmation", "ResendConfirmation", new { id = item["Id"] })
+            }
+        </td>
+    </tr>
+}
 </table>
 
-<table id="EmpGrid">
+@*<table id="EmpGrid">
 
-</table>
+</table>*@
 <div id="pager"></div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -153,6 +220,7 @@
                     { name: "Country", editable: true, editrules: { required: true } }
                 ],
                 afterComplete: function (response) {
+                    alert(response);
                     if (response.responseJSON) {
                         if (response.responseJSON == "Saved Successfully") {
                             alert("Saved Successfully");
@@ -165,20 +233,6 @@
                             }
                         }
 
-                    }
-                }
-            },
-
-            {
-                zIndex: 1000,
-                url: "/ApplicationUsers/DeleteEmp",
-                closeOnEscape: true,
-                closeAfterDelete: true,
-                recreateForm: true,
-                msg: "Are you sure you want to delete the Employee... ? ",
-                afterComplete: function (response) {
-                    if (response.responseText) {
-                        alert(response.responseText);
                     }
                 }
             });
