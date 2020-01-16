@@ -272,7 +272,10 @@ namespace EmployeeManagement.Controllers
 
         #endregion jqGrid
 
-
+        public void DummyMethod()
+        {
+            // It does nothing!!!
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
