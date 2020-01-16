@@ -38,8 +38,6 @@ namespace EmployeeManagement.Controllers
                 SqlDataReader dr = command.ExecuteReader();
                 DataTable dt = new DataTable();
                 dt.Load(dr);
-
-                //return Json(stats, JsonRequestBehavior.AllowGet);
                 return View(dt);
             }
         }
