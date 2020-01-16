@@ -38,8 +38,6 @@ namespace EmployeeManagement.Controllers
                 SqlDataReader dr = command.ExecuteReader();
                 DataTable dt = new DataTable();
                 dt.Load(dr);
-
-                //return Json(stats, JsonRequestBehavior.AllowGet);
                 return View(dt);
             }
         }
@@ -264,13 +262,13 @@ namespace EmployeeManagement.Controllers
 
         }
 
-        public string DeleteEmp(string Id)
-        {
-            ApplicationUser applicationUser = db.Users.Find(Id);
-            db.Users.Remove(applicationUser);
-            db.SaveChanges();
-            return "Deleted successfully";
-        }
+        //public string DeleteEmp(string Id)
+        //{
+        //    ApplicationUser applicationUser = db.Users.Find(Id);
+        //    db.Users.Remove(applicationUser);
+        //    db.SaveChanges();
+        //    return "Deleted successfully";
+        //}
 
         #endregion jqGrid
 
