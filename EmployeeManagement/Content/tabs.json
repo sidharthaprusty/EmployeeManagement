@@ -1,0 +1,46 @@
+﻿{
+  "Tabs": {
+    "Tab": [
+      {
+        "name": "section1",
+        "Widget": [
+          {
+            "id": "1",
+            "type": "pushbutton",
+            "name": "Mybutton1",
+            "LinkedPin": "1"
+          },
+          {
+            "id": "2",
+            "type": "pushbutton",
+            "name": "Mybutton2",
+            "LinkedPin": "2"
+          },
+          {
+            "id": "3",
+            "type": "togglebutton",
+            "name": "Mybutton3",
+            "LinkedPin": "3"
+          }
+        ]
+      },
+      {
+        "name": "section2",
+        "Widget": [
+          {
+            "id": "4",
+            "type": "togglebutton",
+            "name": "Mybutton4",
+            "LinkedPin": "4"
+          },
+          {
+            "id": "5",
+            "type": "togglebutton",
+            "name": "Mybutton5",
+            "LinkedPin": "5"
+          }
+        ]
+      }
+    ]
+  }
+}
