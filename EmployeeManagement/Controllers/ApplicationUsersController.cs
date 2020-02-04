@@ -23,23 +23,23 @@ namespace EmployeeManagement.Controllers
         // GET: ApplicationUsers
         public ActionResult Index()
         {
-            //var users = db.Users.ToList();            
-            //return View(users);
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-            string sqlproc = "";
-            sqlproc = "selectUsers";
-            using (SqlCommand command = new SqlCommand(sqlproc, con))
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                //command.Parameters.Add("name", SqlDbType.VarChar, 50).Value = "Sid";
-                List<ApplicationUser> data = new List<ApplicationUser>();
-                con.Open();
-                var result = command.ExecuteScalar();
-                SqlDataReader dr = command.ExecuteReader();
-                DataTable dt = new DataTable();
-                dt.Load(dr);
-                return View(dt);
-            }
+            var users = db.Users.ToList();
+            return View(users);
+            //SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            //string sqlproc = "";
+            //sqlproc = "selectUsers";
+            //using (SqlCommand command = new SqlCommand(sqlproc, con))
+            //{
+            //    command.CommandType = CommandType.StoredProcedure;
+            //    //command.Parameters.Add("name", SqlDbType.VarChar, 50).Value = "Sid";
+            //    List<ApplicationUser> data = new List<ApplicationUser>();
+            //    con.Open();
+            //    var result = command.ExecuteScalar();
+            //    SqlDataReader dr = command.ExecuteReader();
+            //    DataTable dt = new DataTable();
+            //    dt.Load(dr);
+            //    return View(dt);
+            //}
         }
 
         // GET: ApplicationUsers/Details/5

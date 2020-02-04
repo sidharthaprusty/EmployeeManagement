@@ -1,6 +1,6 @@
-﻿@*@model IEnumerable<EmployeeManagement.Models.ApplicationUser>*@
+﻿@model IEnumerable<EmployeeManagement.Models.ApplicationUser>
 
-@using System.Data
+@*@using System.Data*@
 @{
     ViewBag.Title = "Index";
 }
@@ -11,7 +11,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    @*<tr>
+    <tr>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
@@ -78,9 +78,9 @@
                 }
             </td>
         </tr>
-    }*@
+    }
 
-    <tr>
+    @*<tr>
         <th>
             @Html.DisplayName("FirstName")
         </th>
@@ -145,7 +145,7 @@
             }
         </td>
     </tr>
-}
+}*@
 </table>
 
 @*<table id="EmpGrid">
